@@ -18,6 +18,8 @@
 
     <modules>
         <module>study-java8</module>
+        <module>study-netty</module>
+        <module>study-concurrency</module>
     </modules>
 
 </project>
