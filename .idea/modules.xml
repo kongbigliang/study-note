@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/study-common/study-common.iml" filepath="$PROJECT_DIR$/study-common/study-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-concurrency/study-concurrency.iml" filepath="$PROJECT_DIR$/study-concurrency/study-concurrency.iml" />
+      <module fileurl="file://$PROJECT_DIR$/study-design-mode/study-design-mode.iml" filepath="$PROJECT_DIR$/study-design-mode/study-design-mode.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-java8/study-java8.iml" filepath="$PROJECT_DIR$/study-java8/study-java8.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-netty/study-netty.iml" filepath="$PROJECT_DIR$/study-netty/study-netty.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-note.iml" filepath="$PROJECT_DIR$/study-note.iml" />

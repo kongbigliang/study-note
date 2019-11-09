@@ -20,6 +20,8 @@
         <module>study-java8</module>
         <module>study-netty</module>
         <module>study-concurrency</module>
+        <module>study-design-mode</module>
+        <module>study-common</module>
     </modules>
 
 </project>
