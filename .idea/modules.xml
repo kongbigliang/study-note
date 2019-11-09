@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/study-java8/study-java8.iml" filepath="$PROJECT_DIR$/study-java8/study-java8.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-netty/study-netty.iml" filepath="$PROJECT_DIR$/study-netty/study-netty.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-note.iml" filepath="$PROJECT_DIR$/study-note.iml" />
+      <module fileurl="file://$PROJECT_DIR$/study-websocket/study-websocket.iml" filepath="$PROJECT_DIR$/study-websocket/study-websocket.iml" />
     </modules>
   </component>
 </project>

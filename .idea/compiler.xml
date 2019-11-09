@@ -11,6 +11,7 @@
         <module name="study-design-mode" />
         <module name="study-java8" />
         <module name="study-netty" />
+        <module name="study-websocket" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,6 +21,7 @@
       <module name="study-java8" target="1.8" />
       <module name="study-netty" target="1.8" />
       <module name="study-note" target="1.8" />
+      <module name="study-websocket" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

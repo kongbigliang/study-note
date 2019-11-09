@@ -22,6 +22,7 @@
         <module>study-concurrency</module>
         <module>study-design-mode</module>
         <module>study-common</module>
+        <module>study-websocket</module>
     </modules>
 
 </project>
