@@ -12,6 +12,7 @@
         <module>eureka</module>
         <module>microservice-item</module>
         <module>microservice-order</module>
+        <module>eureka2</module>
     </modules>
 
 

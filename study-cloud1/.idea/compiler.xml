@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka" />
+        <module name="eureka2" />
         <module name="microservice-item" />
         <module name="microservice-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eureka" target="1.8" />
+      <module name="eureka2" target="1.8" />
       <module name="microservice-item" target="1.8" />
       <module name="microservice-order" target="1.8" />
       <module name="study-cloud1" target="1.5" />
