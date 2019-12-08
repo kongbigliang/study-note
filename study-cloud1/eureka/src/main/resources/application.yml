@@ -1,0 +1,23 @@
+# 服务端口
+server:
+  port: 8100
+# 服务名称
+spring:
+  application:
+    name: app-eureka-center
+  security:
+    basic:
+      enable: flase # 把认证关闭，客户端才能连接服务端
+
+eureka:
+  instance:
+    # 注册中心地址
+    hostname: 127.0.0.1
+  # 客户端调用地址
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    # 是否将自己注册到eureka服务中，因为该应用本身就是注册中心，不需要再注册自己（集群的时候为true）
+    register-with-eureka: false
+    # 是否从eureka中获取注册信息，因为自己为注册中心，不会在该应用中的检索服务信息中
+    fetch-registry: false
