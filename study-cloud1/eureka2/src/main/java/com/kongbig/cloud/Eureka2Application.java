@@ -1,3 +1,5 @@
+package com.kongbig.cloud;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
@@ -13,10 +15,10 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @EnableEurekaServer
 // 把认证关闭，客户端才能连接服务端
 // @EnableAutoConfiguration(exclude = {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class})
-public class EurekaApplication {
+public class Eureka2Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(EurekaApplication.class, args);
+        SpringApplication.run(Eureka2Application.class, args);
     }
 
 }
