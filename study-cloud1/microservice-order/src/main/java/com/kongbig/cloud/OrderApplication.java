@@ -23,7 +23,7 @@ public class OrderApplication {
     }
 
     @Bean
-    @LoadBalanced// RestTemplate就具备了负载均衡的功能。
+    // @LoadBalanced// RestTemplate就具备了负载均衡的功能。
     public RestTemplate restTemplate() {
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
     }
