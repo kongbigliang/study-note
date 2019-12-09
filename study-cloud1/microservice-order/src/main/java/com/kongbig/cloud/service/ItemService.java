@@ -23,7 +23,7 @@ public class ItemService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public Item queryItemById(Long id) {
+    /*public Item queryItemById(Long id) {
         String serviceId = "app-item";
         List<ServiceInstance> instances = discoveryClient.getInstances(serviceId);
         if (instances.isEmpty()) {
@@ -33,6 +33,19 @@ public class ItemService {
         ServiceInstance serviceInstance = instances.get(0);
         String url = String.format("%s:%s", serviceInstance.getHost(), serviceInstance.getPort());
         return this.restTemplate.getForObject(String.format("http://%s/item/%d", url, id), Item.class);
+    }*/
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Item queryItemById(Long id) {
+        // 该方法走eureka注册中心调用（这种方法必须先开启负载均衡@LoadBalanced）
+        String itemUrl = "http://app-item/item/{id}";
+        Item result = restTemplate.getForObject(itemUrl, Item.class, id);
+        System.out.println("订单系统调用商品服务，result：" + result);
+        return result;
     }
 
 }
