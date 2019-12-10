@@ -26,6 +26,9 @@ public class ItemService {
     // Spring框架对RESTful方式的http请求做了封装，来简化操作
     @Autowired
     private RestTemplate restTemplate;
+    /**
+     * 底层生成代理类
+     */
     @Autowired
     private ItemFeignClient itemFeignClient;
 
@@ -66,10 +69,12 @@ public class ItemService {
      *
      * 改造成使用feign请求商品服务
      *
+     * 实际开发中fallback 方法不会直接写在接口方法所在类里，那样太杂乱，再改造为回调。
+     *
      * @param id
      * @return
      */
-    @HystrixCommand(fallbackMethod = "queryItemByIdFallBackMethod")
+    // @HystrixCommand(fallbackMethod = "queryItemByIdFallBackMethod")
     public Item queryItemById3(Long id) {
         String itemUrl = "http://app-item/item/{id}";
         // Item result = restTemplate.getForObject(itemUrl, Item.class, id);

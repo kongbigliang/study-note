@@ -19,7 +19,8 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @EnableHystrix
 @EnableFeignClients(basePackages = "com.kongbig.cloud.feign")
-@ComponentScan(basePackages = {"com.kongbig.cloud.controller", "com.kongbig.cloud.service"})//手动指定bean扫描范围
+@ComponentScan(basePackages = {"com.kongbig.cloud.controller", "com.kongbig.cloud.service", "com.kongbig.cloud.fallback"})
+//手动指定bean扫描范围
 public class OrderApplication {
 
     public static void main(String[] args) {

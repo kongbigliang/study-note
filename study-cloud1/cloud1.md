@@ -41,4 +41,8 @@ Hystrix：
 
 Feign:
 Feign是声明式、模块化的HTTP客户端。SpringCloud对Feign进行了增强，使Feign支持了SpringMVC注解，并整合了Ribbon和Eureka。
-
+设置统一的hystrix fallback接口
+- 不在方法上使用@HystrixCommand注解
+- 创建回调类
+- 在Feign客户端中添加fallback属性
+- 配置文件中开启hystrix
