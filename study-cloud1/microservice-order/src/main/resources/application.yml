@@ -16,3 +16,7 @@ eureka:
     register-with-eureka: true
     # 是否需要从eureka上检索服务
     fetch-registry: true
+
+app-item:
+  ribbon:
+    NFLoadBanlancerRuleClassName: com.netflix.loadbalancer.RandomRule
