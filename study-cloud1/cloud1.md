@@ -37,8 +37,8 @@ Hystrix：
 原理说明：
 ![hystrix原理](/cloud-img/hystrix原理.png "hystrix原理")
 当对特定服务的呼叫达到一定阈值时（Hystrix中的默认值为5秒内的20次故障），电路打开，不进行通讯。并且是一个隔离的线程中进行的。
+---
 
-
-
-
+Feign:
+Feign是声明式、模块化的HTTP客户端。SpringCloud对Feign进行了增强，使Feign支持了SpringMVC注解，并整合了Ribbon和Eureka。
 

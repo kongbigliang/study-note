@@ -1,6 +1,7 @@
 package com.kongbig.cloud.service;
 
 import com.kongbig.cloud.entity.Item;
+import com.kongbig.cloud.feign.ItemFeignClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class ItemService {
     // Spring框架对RESTful方式的http请求做了封装，来简化操作
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private ItemFeignClient itemFeignClient;
 
     /**
      * 服务发现中获取服务实例
@@ -59,7 +62,9 @@ public class ItemService {
     }
 
     /**
-     * hystrix容错处理
+     * hystrix容错处理。
+     *
+     * 改造成使用feign请求商品服务
      *
      * @param id
      * @return
@@ -67,7 +72,8 @@ public class ItemService {
     @HystrixCommand(fallbackMethod = "queryItemByIdFallBackMethod")
     public Item queryItemById3(Long id) {
         String itemUrl = "http://app-item/item/{id}";
-        Item result = restTemplate.getForObject(itemUrl, Item.class, id);
+        // Item result = restTemplate.getForObject(itemUrl, Item.class, id);
+        Item result = itemFeignClient.queryItemById(id);
         System.out.println("====HystrixCommand queryItemById-线程池名称：" + Thread.currentThread().getName()
                 + "订单系统调用商品服务，result：" + result);
         return result;
