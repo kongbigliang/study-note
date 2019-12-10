@@ -22,4 +22,17 @@ public class OrderController {
         return this.orderService.queryOrderById(orderId);
     }
 
+    /**
+     * 测试发现，加了@HystrixCommand注解的方法和普通方法不是共用的线程池，是隔离的。
+     *
+     * 把商品服务关闭进行测试，代码将执行@HystrixCommand的容错方法
+     *
+     * @param orderId
+     * @return
+     */
+    @GetMapping(value = "order2/{orderId}")
+    public Order queryOrderById2(@PathVariable("orderId") String orderId) {
+        return this.orderService.queryOrderByIdx(orderId);
+    }
+
 }

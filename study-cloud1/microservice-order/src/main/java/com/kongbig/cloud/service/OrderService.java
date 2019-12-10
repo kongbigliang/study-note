@@ -71,7 +71,7 @@ public class OrderService {
         List<OrderDetail> orderDetails = order.getOrderDetails();
         for (OrderDetail orderDetail : orderDetails) {
             // 通过商品微服务查询商品详细数据
-            Item item = this.itemService.queryItemById(orderDetail.getItem()
+            Item item = this.itemService.queryItemById2(orderDetail.getItem()
                     .getId());
             if (null == item) {
                 continue;
@@ -82,4 +82,25 @@ public class OrderService {
         return order;
     }
 
+    /**
+     *
+     * @param orderId
+     * @return
+     */
+    public Order queryOrderByIdx(String orderId) {
+        Order order = ORDER_DATA.get(orderId);
+        if (Objects.isNull(order)) {
+            return null;
+        }
+        List<OrderDetail> orderDetails = order.getOrderDetails();
+        for (OrderDetail orderDetail : orderDetails) {
+            // 通过商品微服务查询商品详细数据
+            Item item = this.itemService.queryItemById3(orderDetail.getItem().getId());
+            if (Objects.isNull(item)){
+                continue;
+            }
+            orderDetail.setItem(item);
+        }
+        return order;
+    }
 }
