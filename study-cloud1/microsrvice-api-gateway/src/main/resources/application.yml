@@ -1,0 +1,10 @@
+server:
+  port: 8087  # 服务端口
+spring:
+  application:
+    name: app-zuul-gateway  # 指定服务名
+zuul:
+  routes: # 定义服务转发规则
+    item-service: # item-service这个名字任意取的
+      path: /item-service/**  # 配置请求URL的请求规则
+      url: http://127.0.0.1:8081  # 真正的微服务地址，path匹配的请求都转发到这里

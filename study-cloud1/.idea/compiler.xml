@@ -10,6 +10,7 @@
         <module name="eureka2" />
         <module name="microservice-item" />
         <module name="microservice-order" />
+        <module name="microsrvice-api-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -17,6 +18,7 @@
       <module name="eureka2" target="1.8" />
       <module name="microservice-item" target="1.8" />
       <module name="microservice-order" target="1.8" />
+      <module name="microsrvice-api-gateway" target="1.8" />
       <module name="study-cloud1" target="1.5" />
     </bytecodeTargetLevel>
   </component>

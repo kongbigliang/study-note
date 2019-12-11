@@ -46,3 +46,30 @@ Feign是声明式、模块化的HTTP客户端。SpringCloud对Feign进行了增�
 - 创建回调类
 - 在Feign客户端中添加fallback属性
 - 配置文件中开启hystrix
+---
+
+SpringCloudZuul：
+Zuul是Netflix开源的微服务网关，它可以和Eureka、Ribbon、Hystrix等组件配合使用。
+Zuul的核心是一系列的过滤器，完成了一下功能：
+-- 身份认证与安全：
+-- 审查与监控：
+-- 动态路由：
+-- 压力测试：逐渐增加指向集群的流量，以了解性能。
+-- 负载分配：
+-- 静态响应处理：在边缘位置直接建立部分相应，从而避免其转发到内部集群。
+-- 多区域弹性：
+SpringCloud对Zuul进行了整合与增强。目前，Zuul默认使用HTTP客户端是Apache HTTP Client；
+如果想使用RestClient，可以设置ribbon.restclient.enabled=true；
+想要使用okhttp3.OkHttpClient，可以设置ribbon.okhttp.enabled=true；
+使用Zuul之后的架构：
+![使用Zuul之后的架构](/cloud-img/使用Zuul之后的架构.png "使用Zuul之后的架构")
+
+
+
+
+
+
+
+
+
+

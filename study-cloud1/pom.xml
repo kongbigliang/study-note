@@ -13,6 +13,7 @@
         <module>microservice-item</module>
         <module>microservice-order</module>
         <module>eureka2</module>
+        <module>microsrvice-api-gateway</module>
     </modules>
 
 
