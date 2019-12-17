@@ -7,6 +7,11 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 /**
  * 访问：http://127.0.0.1:8087/item-service/item/2
  * item-service路由到商品服务：127.0.0.1:8081
+ * <br>
+ * 访问：
+ * http://127.0.0.1:8087/item-service/item/2
+ * http://127.0.0.1:8087/order-service/order/201810300002
+ * 测试网关
  *
  * @author lianggangda
  * @date 2019/12/11 13:50

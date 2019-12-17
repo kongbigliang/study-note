@@ -29,6 +29,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <!--整合eureka客户端-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <!--整合zuul网关-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
