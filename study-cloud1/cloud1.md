@@ -51,25 +51,90 @@ Feign是声明式、模块化的HTTP客户端。SpringCloud对Feign进行了增�
 SpringCloudZuul：
 Zuul是Netflix开源的微服务网关，它可以和Eureka、Ribbon、Hystrix等组件配合使用。
 Zuul的核心是一系列的过滤器，完成了一下功能：
--- 身份认证与安全：
--- 审查与监控：
--- 动态路由：
--- 压力测试：逐渐增加指向集群的流量，以了解性能。
--- 负载分配：
--- 静态响应处理：在边缘位置直接建立部分相应，从而避免其转发到内部集群。
--- 多区域弹性：
+- 身份认证与安全：
+- 审查与监控：
+- 动态路由：
+- 压力测试：逐渐增加指向集群的流量，以了解性能。
+- 负载分配：
+- 静态响应处理：在边缘位置直接建立部分相应，从而避免其转发到内部集群。
+- 多区域弹性：
+
 SpringCloud对Zuul进行了整合与增强。目前，Zuul默认使用HTTP客户端是Apache HTTP Client；
 如果想使用RestClient，可以设置ribbon.restclient.enabled=true；
 想要使用okhttp3.OkHttpClient，可以设置ribbon.okhttp.enabled=true；
 使用Zuul之后的架构：
 ![使用Zuul之后的架构](/cloud-img/使用Zuul之后的架构.png "使用Zuul之后的架构")
 
+zuul配置详解：
+- 指定服务id
+zuul.routes.指定微服务的serviceId = 指定路径即可，如：
+zuul:
+    routes:
+        ms-provider-user: /user/**
+这样设置，ms-provider-user微服务就会被映射到/user/**路径。
 
+- 忽略指定服务：
+zuul:
+    ignored-services: ms-provider-user,ms-consumer-movie
+这样设置，zuul忽略ms-provider-user和ms-consumer-movie两个微服务。
 
+- 忽略所有服务，只是由路由指定：
+zuul:
+    ignored-services: '*'   # 使用'*'可忽略所有微服务
+    routes: 
+        ms-provider-user: /user/**
+这样设置，可以只路由ms-provider-user微服务
 
+- 同时配置path和url：
+zuul:
+    routes:
+        # 该配置方式中，user-route只是给路由一个名称，可以任意起名。
+        user-route:
+            url: http://localhost:8000/     # 指定的url
+            path: /user/**                  # url对应的路径
+这样就可以将path映射到url。（不能使用Ribbon来负载多个url）
 
+- 面向服务配置，不破坏Hystrix、Ribbon特性：
+zuul:
+    routes: # 定义服务转发规则
+        item-service: # item-service这个名字是任意写的
+            path: /item-service/**      # 匹配item-service的url路径请求app-item服务
+            serviceid: app-item
+        order-service: # 名字尽量和业务系统相关
+            path: /order-service/**     # 匹配order-service的url路径请求app-order服务
+            serviceid: app-order        # 指定Eureka注册中心的服务id
+        
+- 使用正则表达式指定路由规则：
+```
+@Bean
+public PatternServiceRouteMapper serviceRouteMapper() {
+    // 调用构造函数
+    // public PatternServiceRouteMapper(String servicePattern, String routePattern)
+    // servicePattern指定微服务的正则
+    // routePattern指定路由正则
+    return new PatternServiceRouteMapper("(?<name>^.+)-(?<version>v.+$)", 
+            "${version}/${name}")
+}
+```
+通过这段代码可实现诸如ms-provider-user-v1这个微服务，映射到/v1/ms-provider-user/**这个路径。
 
+- 路由前缀：
+zuul:
+    prefix: /api
+    strip-prefix: false
+    routes:
+        ms-provider-user: /user/**
+这样访问zuul的/api/ms-provider-user/1路径，请求会被转发到ms-provider-user的/api/1
+zuul:
+    routes:
+        ms-provider-user:
+            path: /user/**
+            strip-prefix: false
+这样访问zuul的/user/1路径，请求会被转发到ms-provider-user的/user/1。
 
-
-
-
+- 忽略某些路径：
+zuul:
+    ignoredPatterns: /**/admin/**   # 忽略所有包含/admin/的路径
+    routes:
+        ms-provider-user: /user/**
+这样可将ms-provider-user微服务映射到/user/**的路径，但会忽略该微服务中包含/admin/的路径。
