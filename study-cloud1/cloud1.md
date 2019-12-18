@@ -194,3 +194,9 @@ Config Client是Config Server的客户端，用于操作存储在Config Server�
 /{label}/{application}-{profile}.properties
 ```
 application相当于spring.application.name
+
+为Config Client添加refresh支持：
+使用actuator 监控中心完成刷新功能，Bean加上@RefreshScope注解
+手动发起post请求actuator接口：
+    POST请求监控中心 http://127.0.0.1:8081/actuator/refresh
+    

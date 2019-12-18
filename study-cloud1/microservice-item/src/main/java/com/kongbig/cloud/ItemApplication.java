@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * SpringBootApplication包含ComponentScan，默认扫描子包
  *
+ * POST请求监控中心 http://127.0.0.1:8081/actuator/refresh 来刷新配置
+ *
  * @author lianggangda
  * @date 2019/12/6 16:41
  */

@@ -1,15 +1,19 @@
 package com.kongbig.cloud.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 /**
  * Jdbc
  *
+ * actuator 监控中心完成刷新功能
+ *
  * @author lianggangda
  * @date 2019/12/18 15:22
  */
 @Component
+@RefreshScope
 public class JdbcConfigBean {
 
     @Value("${jdbc.url}")
