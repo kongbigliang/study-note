@@ -178,4 +178,19 @@ http {
 ```
 
 ---
+分布式配置中心 Spring Cloud Config
+为分布式系统外部化配置提供了服务器端和客户端的支持，它包含了Config Server和Config Client两部分。
+Config Server和Config Client都实现了对Spring Environment和PropertySource抽象的映射。
 
+Config Server是一个可横向扩展、集中式的配置服务器，它用于集中管理应用程序各个环境下的配置，默认使用Git存储配置文件内容，也可以使用SVN存储，或者是本地文件存储。
+Config Client是Config Server的客户端，用于操作存储在Config Server中的配置内容。微服务在启动时会请求Config Server获取配置文件的内容，请求到后再启动容器。
+
+请求配置文件的规则如下：
+```markdown
+/{application}/{profile}/[label]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+```
+application相当于spring.application.name
