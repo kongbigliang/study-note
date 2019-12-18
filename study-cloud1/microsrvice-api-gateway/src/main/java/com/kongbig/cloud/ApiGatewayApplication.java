@@ -3,6 +3,7 @@ package com.kongbig.cloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * 访问：http://127.0.0.1:8087/item-service/item/2
@@ -18,6 +19,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  */
 @EnableZuulProxy
 @SpringBootApplication
+@ComponentScan(basePackages = "com.kongbig.cloud.filter")
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
