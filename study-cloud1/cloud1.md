@@ -151,4 +151,31 @@ ZuulFilter是一个抽象类，其实现类需要实现4个方法：
 - filterOrder：通过返回的int值来定义过滤器的执行顺序，数字越小优先级越高。
 ![ZuulFilter执行流程](/cloud-img/ZuulFilter执行流程.png "ZuulFilter执行流程")
 
+默认开启ribbon：
+Zuul网关默认开启了 ribbon 负载均衡，可以修改端口，启动多个Item服务进行测试。
+
+动态网关：
+将yml配置文件中的路由配置信息存在配置中心中可以实现网关的动态配置。
+
+网关集群：
+Zuul可以配合nginx搭建网关集群。只要在nginx的配置文件nginx.conf里配置多个zuul地址：
+```markdown
+http {
+  	upstream myhttpServer {
+            # 配置多个zuul地址
+	    server localhost:8087;
+	    server localhost:8086;
+	}
+	server {
+        listen       80;
+        server_name  www.kongbig.com;
+        location / {
+                proxy_pass   http://myhttpServer;
+                index  index.html index.htm;
+            }
+	}
+}
+```
+
+---
 
