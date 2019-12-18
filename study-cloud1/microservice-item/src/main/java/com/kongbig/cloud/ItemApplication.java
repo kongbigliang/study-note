@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication//申明这是一个Spring Boot项目
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.kongbig.cloud.controller", "com.kongbig.cloud.service"})//手动指定bean组件扫描范围
+@ComponentScan(basePackages = {"com.kongbig.cloud.controller", "com.kongbig.cloud.service", "com.kongbig.cloud.config"})//手动指定bean组件扫描范围
 public class ItemApplication {
 
     public static void main(String[] args) {

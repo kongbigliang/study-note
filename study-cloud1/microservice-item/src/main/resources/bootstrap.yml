@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    config:
+      # 配置中心地址
+      uri: http://127.0.0.1:7788/
+      # 对应配置服务中的{profile}
+      profile: dev
+      # 对应的分支
+      label: master
