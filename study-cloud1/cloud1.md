@@ -138,3 +138,17 @@ zuul:
     routes:
         ms-provider-user: /user/**
 这样可将ms-provider-user微服务映射到/user/**的路径，但会忽略该微服务中包含/admin/的路径。
+
+过滤器ZuulFilter：
+ZuulFilter是一个抽象类，其实现类需要实现4个方法：
+- shouldFilter：返回一个Boolean值，判断该过滤器是否需要执行。返回true执行，返回false不执行。
+- run：过滤器的具体业务逻辑。
+- filterType：返回字符串代表过滤器的类型
+    - pre：请求在被路由之前执行
+    - routing：在路由请求时调用
+    - post：在routing和error过滤器之后调用
+    - error：处理请求时发生错误调用
+- filterOrder：通过返回的int值来定义过滤器的执行顺序，数字越小优先级越高。
+![ZuulFilter执行流程](/cloud-img/ZuulFilter执行流程.png "ZuulFilter执行流程")
+
+
