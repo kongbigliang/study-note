@@ -1,0 +1,21 @@
+server:
+  port: 7788
+
+spring:
+  application:
+    # 指定服务名
+    name: microservice-config-server
+  cloud:
+    config:
+      server:
+        # 配置git仓库地址
+        git:
+          uri: https://github.com/kongbigliang/study-note.git
+          search-paths:
+          - myspringcloudconfig   # 配置文件目录地址
+          # 码云/github账号（公有项目不需要设置）
+          username: xxxxxx
+          # 码云密码（公有项目不需要设置）
+          password: xxxxxx
+          # 分支名称
+        default-label: master
