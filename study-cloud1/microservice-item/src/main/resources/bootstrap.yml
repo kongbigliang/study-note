@@ -1,9 +1,35 @@
+# 服务注册到eureka注册中心的地址
+eureka:
+  # 客户端调用地址
+  client:
+    serviceUrl:
+      defaultZone: http://kongbig:123456@127.0.0.1:8100/eureka/,http://kongbig:123456@127.0.0.1:9100/eureka/
+    # 因为该应用为服务提供者，是eureka的一个客户端，需要注册到注册中心
+    register-with-eureka: true
+    # 是否需要从eureka上检索服务
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true #将自己的ip地址注册到Eureka服务中
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}###${server.port} #指定实例id
+
 spring:
   cloud:
     config:
       # 配置中心地址
-      uri: http://127.0.0.1:7788/
+      # uri: http://127.0.0.1:7788/
+      # 对应配置中心的应用名称，默认是本应用名，即spring.application.name，该名称要和git中的配置一直（涉及配置文件命名规则）
+      name: app-item
       # 对应配置服务中的{profile}
       profile: dev
       # 对应的分支
       label: master
+      discovery:
+        # 启用服务发现功能
+        enabled: true
+        # 指定配置中心工程的名称
+        service-id: microservice-config-server
+
+# 疑问：在application.yml中以及配置Eureka的信息，为什么在bootstrap.yml还需要配置？
+# 因为在Spring Boot中bootstrap.yml在application.yml之前加载，所以即使在application.yml中以及配置Eureka的信息，
+# 是使用不了的，所以需要在bootstrap.yml中配置Eureka的信息。

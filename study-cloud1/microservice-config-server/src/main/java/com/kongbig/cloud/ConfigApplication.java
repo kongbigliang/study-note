@@ -3,6 +3,7 @@ package com.kongbig.cloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * 开启配置服务
@@ -14,6 +15,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
  * @date 2019/12/18 11:20
  */
 @EnableConfigServer
+@EnableEurekaClient
 @SpringBootApplication
 public class ConfigApplication {
 

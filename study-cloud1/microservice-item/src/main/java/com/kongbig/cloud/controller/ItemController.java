@@ -24,9 +24,6 @@ public class ItemController {
     @Autowired
     private JdbcConfigBean jdbcConfigBean;
 
-    @Value("${spring.cloud.config.uri}")
-    private String uri;
-
     /**
      * 对外提供接口服务，查询商品信息
      *
