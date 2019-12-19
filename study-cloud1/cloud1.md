@@ -200,3 +200,7 @@ application相当于spring.application.name
 手动发起post请求actuator接口：
     POST请求监控中心 http://127.0.0.1:8081/actuator/refresh
     
+借助与git的WebHooks（web钩子）实现自动更新：
+码云、github等git服务器提供了web hook功能，意思是，在仓库中的资源发生更新时会通知给谁，这里的谁是一个url地址。
+![WebHooks更新配置的流程](/cloud-img/WebHooks更新配置的流程.png "WebHooks更新配置的流程")
+
