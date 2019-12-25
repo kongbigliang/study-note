@@ -26,7 +26,7 @@ public class Receiver2 {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
         // 同一服务器只会发送一条消息给消费者
-        channel.basicQos(1);
+        // channel.basicQos(1);
 
         // 定义队列的消费者
         QueueingConsumer consumer = new QueueingConsumer(channel);
