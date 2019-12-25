@@ -51,6 +51,13 @@ channel.basicConsume(QUEUE_NAME, false, consumer);
 6.路由模式：
 ![路由模式](/mq-img/路由模式.png "路由模式")
 
+7.主题模式（通配符模式）：
+topic exchange将路由键和某模式进行匹配。此时队列需要绑定在一个模式上。
+“#”匹配一个或多个词，“*”匹配不多不少一个词。
+“audit.#”可以匹配“audit.irs.corporate”，“audit.*”只会匹配“audit.irs”
+![主题模式](/mq-img/主题模式.png "主题模式")
+
+
 用户角色：
 - 超级管理员(administrator)
 可登陆管理控制台，可查看所有的信息，并且可以对用户，策略(policy)进行操作。
