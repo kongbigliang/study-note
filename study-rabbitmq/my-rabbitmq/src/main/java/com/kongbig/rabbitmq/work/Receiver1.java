@@ -15,6 +15,9 @@ import java.io.IOException;
  * 平均每个消费者获得相同数量的消息。这种方式分发消息机制称为Round-Robin（轮询）。
  * <p>
  * 公平分发：使用公平分发，必须关闭自动应答，改为手动应答。
+ * <p>
+ * <p>
+ * basicQos( prefetchCount = 1)方法，来限制RabbitMQ只发不超过1条的消息给同一个消费者。当消息处理完毕后，有了反馈，才会进行第二次发送。
  *
  * @author lianggangda
  * @date 2019/12/24 17:41
@@ -32,12 +35,13 @@ public class Receiver1 {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
         // 同一服务器只会发送一条消息给消费者
-        // channel.basicQos(1);
+        int prefetchCount = 1;
+        channel.basicQos(prefetchCount);
 
         // 定义队列的消费者
         QueueingConsumer consumer = new QueueingConsumer(channel);
         // 监听队列，false表示手动返回完成状态，true表示自动（autoAck）
-        channel.basicConsume(QUEUE_NAME, true, consumer);
+        channel.basicConsume(QUEUE_NAME, false, consumer);
 
         // 获取消息
         while (true) {
@@ -47,7 +51,7 @@ public class Receiver1 {
             // 休眠
             Thread.sleep(10);
             // 返回确认状态，注释掉表示使用自动确认模式（autoAck）
-            // channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         }
     }
 
