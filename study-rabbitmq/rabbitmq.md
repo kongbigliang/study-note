@@ -48,6 +48,9 @@ channel.basicConsume(QUEUE_NAME, false, consumer);
 注意：一个消费者队列可以有多个消费者实例，只有其中一个消费者实例会消费
 ![订阅模式](/mq-img/订阅模式.png "订阅模式")
 
+6.路由模式：
+![路由模式](/mq-img/路由模式.png "路由模式")
+
 用户角色：
 - 超级管理员(administrator)
 可登陆管理控制台，可查看所有的信息，并且可以对用户，策略(policy)进行操作。
