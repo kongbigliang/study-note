@@ -213,4 +213,11 @@ Spring Cloud Bus消息总线：
 流程总结：（8082也是item服务）
 更新文件到git服务器，Git服务器通过web钩子通知到8081的/bus/refresh，8081的实例将消息发送到springCloudBus的交换机，由于8081的队列页绑定到交换机，所以8082也获取到了更新的通知，然后去Config Server获取最新的数据。
 
+架构优化：
+在前面的架构中，8081这个实例不仅仅是提供了商品查询的服务，还负责发送更新的消息到RabbitMQ。
+违反了微服务架构中的职责单一的原则。
+改进：将原有的Config Server不仅仅提供配置查询的服务，而且还要负责更新消息的发送。web hook通知ConfigServer
+修改Git中的web钩子，直接通知ConfigServer
+![架构优化图](/cloud-img/架构优化图.png "架构优化图")
+
 

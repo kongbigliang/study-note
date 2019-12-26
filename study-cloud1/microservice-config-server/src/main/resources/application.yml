@@ -19,6 +19,12 @@ spring:
           password: xxxxxx
           # 分支名称
         default-label: master
+  # RabbitMQ相关的配置
+  rabbitmq:
+    host: 192.168.25.213
+    port: 5672
+    username: guest
+    password: guest
 
 # 服务注册到eureka注册中心的地址
 eureka:
@@ -32,3 +38,10 @@ eureka:
   instance:
     prefer-ip-address: true #将自己的ip地址注册到Eureka服务中
     instance-id: ${spring.application.name}###${server.port} #指定实例id
+
+# 暴露触发消息总线的地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
