@@ -204,3 +204,13 @@ application相当于spring.application.name
 码云、github等git服务器提供了web hook功能，意思是，在仓库中的资源发生更新时会通知给谁，这里的谁是一个url地址。
 ![WebHooks更新配置的流程](/cloud-img/WebHooks更新配置的流程.png "WebHooks更新配置的流程")
 
+---
+
+Spring Cloud Bus消息总线：
+目前Spring Cloud Bus消息总线只是实现了对RabbitMQ以及Kafka的支持。
+![Spring Cloud Bus的架构](/cloud-img/Spring Cloud Bus的架构.png "Spring Cloud Bus的架构")
+
+流程总结：（8082也是item服务）
+更新文件到git服务器，Git服务器通过web钩子通知到8081的/bus/refresh，8081的实例将消息发送到springCloudBus的交换机，由于8081的队列页绑定到交换机，所以8082也获取到了更新的通知，然后去Config Server获取最新的数据。
+
+

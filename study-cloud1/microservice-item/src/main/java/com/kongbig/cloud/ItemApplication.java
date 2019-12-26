@@ -11,6 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * POST请求监控中心 http://127.0.0.1:8081/actuator/refresh 来刷新配置
  *
+ * /bus-refresh是由Spring Cloud Bus来处理：
+ * http://127.0.0.1:8081/actuator/bus-refresh
+ *
  * @author lianggangda
  * @date 2019/12/6 16:41
  */
