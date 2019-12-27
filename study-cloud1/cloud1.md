@@ -220,4 +220,10 @@ Spring Cloud Bus消息总线：
 修改Git中的web钩子，直接通知ConfigServer
 ![架构优化图](/cloud-img/架构优化图.png "架构优化图")
 
+---
+
+整合zookeeper作为注册中心：
+参考项目。
+
+
 
