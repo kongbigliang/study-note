@@ -9,6 +9,8 @@
       <module fileurl="file://$PROJECT_DIR$/microservice-order/microservice-order.iml" filepath="$PROJECT_DIR$/microservice-order/microservice-order.iml" />
       <module fileurl="file://$PROJECT_DIR$/microsrvice-api-gateway/microsrvice-api-gateway.iml" filepath="$PROJECT_DIR$/microsrvice-api-gateway/microsrvice-api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/study-cloud1.iml" filepath="$PROJECT_DIR$/study-cloud1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zookeeper-item/zookeeper-item.iml" filepath="$PROJECT_DIR$/zookeeper-item/zookeeper-item.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zookeeper-order/zookeeper-order.iml" filepath="$PROJECT_DIR$/zookeeper-order/zookeeper-order.iml" />
     </modules>
   </component>
 </project>

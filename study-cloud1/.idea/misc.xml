@@ -4,6 +4,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/zookeeper-item/pom.xml" />
+        <option value="$PROJECT_DIR$/zookeeper-order/pom.xml" />
       </list>
     </option>
   </component>

@@ -224,6 +224,9 @@ Spring Cloud Bus消息总线：
 
 整合zookeeper作为注册中心：
 参考项目。
+通过ZooInspector查看注册的服务。
 
+--- 
 
-
+整合consul作为注册中心：
+有点难玩，不搞了，接下来学习Spring Cloud Alibaba
