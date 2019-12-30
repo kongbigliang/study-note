@@ -25,3 +25,7 @@ app-item:
 feign:
   hystrix:
     enabled: true
+
+# 配置swagger接口扫描范围
+swagger:
+  base-package: com.kongbig.cloud

@@ -233,7 +233,10 @@ Spring Cloud Bus消息总线：
 
 --- 
 
-整合swagger API管理
+整合swagger API管理：
 启动工程，访问http://localhost:8081/swagger-ui.html
 
+Zuul整合Swagger统一管理微服务Api：
+在一个入口统一管理所有微服务(订单服务、商品服务等)项目的API。
+实现方式：zuul。
 
