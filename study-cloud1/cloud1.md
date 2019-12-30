@@ -230,3 +230,10 @@ Spring Cloud Bus消息总线：
 
 整合consul作为注册中心：
 有点难玩，不搞了，接下来学习Spring Cloud Alibaba
+
+--- 
+
+整合swagger API管理
+启动工程，访问http://localhost:8081/swagger-ui.html
+
+
