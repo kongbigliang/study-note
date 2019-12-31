@@ -82,3 +82,10 @@ Spring-Rabbit
 非持久化的性能高于持久化。
 ![持久化交换机和队列](/mq-img/持久化交换机和队列.png "持久化交换机和队列")
 
+---
+
+Spring集成RabbitMQ一个完整案例
+创建三个系统A,B,C
+A作为生产者，B、C作为消费者(B,C作为web项目启动)
+详情请看代码。
+分别启动B,C两个web应用，然后运行A的MsgSender主方法发送消息，分别测试fanout、direct、topic三种类型
