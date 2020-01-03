@@ -8,7 +8,7 @@ Eureka是Netflix开源的服务发现组件，本身是一个基于REST的服务
 
 Ribbon：
 Ribbon是Netflix发布的负载均衡器，它有助于控制HTTP和TCP客户端的行为。为Ribbon配置服务提供者地址列表后，Ribbon就基于某种负载均衡算法，自动地帮助服务消费者去请求。Ribbon默认为我们提供很多的负载均衡算法，例如轮询、随机等。也可为Ribbon实现自定义的负载均衡算法。 
-![ribbon架构](/cloud-img/ribbon架构.png "ribbon架构")
+![ribbon架构](./cloud-img/ribbon架构.png "ribbon架构")
 
 设置负载均衡策略
 只需要在配置文件中添加配置
@@ -26,7 +26,7 @@ serviceId.ribbon.NFLoadBalancerRuleClassName=自定义的负载均衡策略类
 Hystrix：
 容错保护。防止级联失败，对延迟和故障提供容错能力。
 雪崩效应：多个服务之间调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况。
-![hystrix雪崩效应](/cloud-img/hystrix雪崩效应.png "hystrix雪崩效应")
+![hystrix雪崩效应](./cloud-img/hystrix雪崩效应.png "hystrix雪崩效应")
 实现延迟容错：
 - 包裹请求：使用HystrixCommand/HystrixObservableCommand包裹对依赖的调用逻辑，每个命令再独立线程中执行。
 - 跳闸机制：某服务的错误率超过某一阈值时，Hystrix自动或手动跳闸，停止请求该服务一段时间。
@@ -35,7 +35,7 @@ Hystrix：
 - 回退机制：当请求失败、超时、被拒绝，或当断路器打开时，执行回退逻辑。回退逻辑可由开发人员自行提供，例如返回缺省值。
 - 自我修复：断路器打开一段时间后，会自动进入“半开”状态。断路器打开、关闭、半开的逻辑转换。
 原理说明：
-![hystrix原理](/cloud-img/hystrix原理.png "hystrix原理")
+![hystrix原理](./cloud-img/hystrix原理.png "hystrix原理")
 当对特定服务的呼叫达到一定阈值时（Hystrix中的默认值为5秒内的20次故障），电路打开，不进行通讯。并且是一个隔离的线程中进行的。
 ---
 
@@ -63,7 +63,7 @@ SpringCloud对Zuul进行了整合与增强。目前，Zuul默认使用HTTP客户
 如果想使用RestClient，可以设置ribbon.restclient.enabled=true；
 想要使用okhttp3.OkHttpClient，可以设置ribbon.okhttp.enabled=true；
 使用Zuul之后的架构：
-![使用Zuul之后的架构](/cloud-img/使用Zuul之后的架构.png "使用Zuul之后的架构")
+![使用Zuul之后的架构](./cloud-img/使用Zuul之后的架构.png "使用Zuul之后的架构")
 
 zuul配置详解：
 - 指定服务id
@@ -149,7 +149,7 @@ ZuulFilter是一个抽象类，其实现类需要实现4个方法：
     - post：在routing和error过滤器之后调用
     - error：处理请求时发生错误调用
 - filterOrder：通过返回的int值来定义过滤器的执行顺序，数字越小优先级越高。
-![ZuulFilter执行流程](/cloud-img/ZuulFilter执行流程.png "ZuulFilter执行流程")
+![ZuulFilter执行流程](./cloud-img/ZuulFilter执行流程.png "ZuulFilter执行流程")
 
 默认开启ribbon：
 Zuul网关默认开启了 ribbon 负载均衡，可以修改端口，启动多个Item服务进行测试。
@@ -202,13 +202,13 @@ application相当于spring.application.name
     
 借助与git的WebHooks（web钩子）实现自动更新：
 码云、github等git服务器提供了web hook功能，意思是，在仓库中的资源发生更新时会通知给谁，这里的谁是一个url地址。
-![WebHooks更新配置的流程](/cloud-img/WebHooks更新配置的流程.png "WebHooks更新配置的流程")
+![WebHooks更新配置的流程](./cloud-img/WebHooks更新配置的流程.png "WebHooks更新配置的流程")
 
 ---
 
 Spring Cloud Bus消息总线：
 目前Spring Cloud Bus消息总线只是实现了对RabbitMQ以及Kafka的支持。
-![Spring Cloud Bus的架构](/cloud-img/Spring Cloud Bus的架构.png "Spring Cloud Bus的架构")
+![Spring Cloud Bus的架构](./cloud-img/Spring Cloud Bus的架构.png "Spring Cloud Bus的架构")
 
 流程总结：（8082也是item服务）
 更新文件到git服务器，Git服务器通过web钩子通知到8081的/bus/refresh，8081的实例将消息发送到springCloudBus的交换机，由于8081的队列页绑定到交换机，所以8082也获取到了更新的通知，然后去Config Server获取最新的数据。
@@ -218,7 +218,7 @@ Spring Cloud Bus消息总线：
 违反了微服务架构中的职责单一的原则。
 改进：将原有的Config Server不仅仅提供配置查询的服务，而且还要负责更新消息的发送。web hook通知ConfigServer
 修改Git中的web钩子，直接通知ConfigServer
-![架构优化图](/cloud-img/架构优化图.png "架构优化图")
+![架构优化图](./cloud-img/架构优化图.png "架构优化图")
 
 ---
 
