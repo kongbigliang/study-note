@@ -16,7 +16,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="120">
-                <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+                <caret line="5" column="84" lean-forward="false" selection-start-line="5" selection-start-column="84" selection-end-line="5" selection-end-column="84" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -24,23 +24,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="软件设计师.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="软件设计师.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/notes/软件设计师.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="447">
-                <caret line="304" column="49" lean-forward="true" selection-start-line="304" selection-start-column="49" selection-end-line="304" selection-end-column="49" />
+              <first_editor relative-caret-position="783">
+                <caret line="318" column="0" lean-forward="true" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SSL通信过程安全保护的过程.png" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pics/softwareDeveloper/SSL通信过程安全保护的过程.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -56,8 +49,8 @@
       <list>
         <option value="$PROJECT_DIR$/软件设计师教程(第5版)/note.md" />
         <option value="$PROJECT_DIR$/note.md" />
-        <option value="$PROJECT_DIR$/notes/软件设计师.md" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/notes/软件设计师.md" />
       </list>
     </option>
   </component>
@@ -109,11 +102,6 @@
               <item name="学海无涯" type="b2602c69:ProjectViewProjectNode" />
               <item name="学海无涯" type="462c0819:PsiDirectoryNode" />
               <item name="notes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="学海无涯" type="b2602c69:ProjectViewProjectNode" />
-              <item name="学海无涯" type="462c0819:PsiDirectoryNode" />
-              <item name="pics" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -248,12 +236,12 @@
       <option name="presentableId" value="Default" />
       <updated>1580462088958</updated>
       <workItem from="1580462090991" duration="201000" />
-      <workItem from="1580462299946" duration="4050000" />
+      <workItem from="1580462299946" duration="4279000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4251000" />
+    <option name="totallyTimeSpent" value="4480000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -335,11 +323,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pics/softwareDeveloper/SSL通信过程安全保护的过程.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="120">
-            <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+            <caret line="5" column="84" lean-forward="false" selection-start-line="5" selection-start-column="84" selection-end-line="5" selection-end-column="84" />
             <folding />
           </first_editor>
           <second_editor />
@@ -349,17 +342,12 @@
     <entry file="file://$PROJECT_DIR$/notes/软件设计师.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="447">
-            <caret line="304" column="49" lean-forward="true" selection-start-line="304" selection-start-column="49" selection-end-line="304" selection-end-column="49" />
+          <first_editor relative-caret-position="783">
+            <caret line="318" column="0" lean-forward="true" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pics/softwareDeveloper/SSL通信过程安全保护的过程.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
   </component>
