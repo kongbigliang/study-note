@@ -11,12 +11,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="note.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/note.md">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="600">
-                <caret line="31" column="28" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+              <first_editor relative-caret-position="120">
+                <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="软件设计师.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/notes/软件设计师.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="447">
+                <caret line="304" column="43" lean-forward="false" selection-start-line="304" selection-start-column="26" selection-end-line="304" selection-end-column="43" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -36,6 +49,8 @@
       <list>
         <option value="$PROJECT_DIR$/软件设计师教程(第5版)/note.md" />
         <option value="$PROJECT_DIR$/note.md" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/notes/软件设计师.md" />
       </list>
     </option>
   </component>
@@ -82,11 +97,6 @@
             <path>
               <item name="学海无涯" type="b2602c69:ProjectViewProjectNode" />
               <item name="学海无涯" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="学海无涯" type="b2602c69:ProjectViewProjectNode" />
-              <item name="学海无涯" type="462c0819:PsiDirectoryNode" />
-              <item name="软件设计师教程(第5版)" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -221,12 +231,12 @@
       <option name="presentableId" value="Default" />
       <updated>1580462088958</updated>
       <workItem from="1580462090991" duration="201000" />
-      <workItem from="1580462299946" duration="2212000" />
+      <workItem from="1580462299946" duration="3258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2413000" />
+    <option name="totallyTimeSpent" value="3459000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -302,6 +312,28 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="600">
             <caret line="31" column="28" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="120">
+            <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notes/软件设计师.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="447">
+            <caret line="304" column="43" lean-forward="false" selection-start-line="304" selection-start-column="26" selection-end-line="304" selection-end-column="43" />
             <folding />
           </first_editor>
           <second_editor />
