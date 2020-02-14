@@ -18,6 +18,7 @@
 
     <modules>
         <module>thread-pool</module>
+        <module>redis-distributedLock</module>
     </modules>
 
     <dependencies>
