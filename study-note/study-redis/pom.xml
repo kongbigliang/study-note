@@ -11,5 +11,12 @@
 
     <artifactId>study-redis</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.kongbig</groupId>
+            <artifactId>study-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>
