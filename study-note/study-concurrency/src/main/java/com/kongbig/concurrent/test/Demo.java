@@ -5,6 +5,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -48,10 +49,7 @@ public class Demo {
                 @Override
                 public Boolean get() {
                     if (a == 1) {
-                        int j = 0;
-                        while (j < 100000000) {
-                            j++;
-                        }
+                        int j = 1 / 0;
                     }
                     System.out.println(a);
                     return true;
@@ -59,6 +57,14 @@ public class Demo {
             }, taskExecutor).thenAcceptAsync(bool -> {
                 countDownLatch.countDown();
                 System.out.println("countDownLatch = " + countDownLatch.getCount());
+            }).exceptionally(new Function<Throwable, Void>() {
+                @Override
+                public Void apply(Throwable throwable) {
+                    countDownLatch.countDown();
+                    // 回调呗
+                    System.out.println(throwable.getMessage());
+                    return null;
+                }
             });
         }
 
@@ -67,6 +73,8 @@ public class Demo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        taskExecutor.destroy();
     }
 
 }
