@@ -59,7 +59,7 @@ public class Demo {
             }, taskExecutor).thenAcceptAsync(bool -> {
                 countDownLatch.countDown();
                 System.out.println("countDownLatch = " + countDownLatch.getCount());
-            }).isCompletedExceptionally();
+            });
         }
 
         try {
