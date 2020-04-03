@@ -4,9 +4,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/study-redis/pom.xml" />
-        <option value="$PROJECT_DIR$/study-sharding-jdbc/pom.xml" />
-        <option value="$PROJECT_DIR$/study-base/pom.xml" />
       </list>
     </option>
   </component>
