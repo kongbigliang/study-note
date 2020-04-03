@@ -110,4 +110,7 @@ docker run -d -p 9000:9000 \
     portainer/portainer
 访问：http://192.168.25.213:9000/#/init/admin
 账密：admin/12345678
+
+参数说明：
+    -v 容器目录 或 -v 本地目录:容器目录
 ```
