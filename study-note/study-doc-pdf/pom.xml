@@ -11,18 +11,49 @@
 
     <artifactId>study-doc-pdf</artifactId>
 
+    <properties>
+        <poi.version>3.17</poi.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.kongbig</groupId>
             <artifactId>study-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!--jacob-->
         <dependency>
             <groupId>com.jacob</groupId>
             <artifactId>jacob</artifactId>
             <version>1.19</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/lib/jacob.jar</systemPath>
+        </dependency>
+        <!--doc & docx-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
 

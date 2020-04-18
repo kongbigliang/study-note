@@ -1,4 +1,4 @@
-package com.kongbig.doc;
+package com.kongbig.doc.demo01;
 
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;

@@ -10,7 +10,7 @@
 2. 如果是在eclipse下开发，需要重新引入jdk（Preference/Java/Installed JREs）
 3. 开发时将jacab.jar包放在项目lib下并add到libraries中即可。
 
-测试demo：com.kongbig.doc.Jacob
+测试demo：com.kongbig.doc.demo01.Jacob
 
 ---
 
