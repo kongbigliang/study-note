@@ -27,6 +27,7 @@ public class XwpfDocx {
         map.put("name", "kongbig");
         map.put("age", "25");
         map.put("sex", "男");
+        map.put("checkbox", "☑");
         String tmpFile = "D:\\dev\\test-poi.docx";
         String exportFile = "D:\\dev\\test-poi-replace.docx";
         createWordByModel(tmpFile, map, exportFile);

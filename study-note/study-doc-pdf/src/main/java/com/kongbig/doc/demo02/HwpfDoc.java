@@ -22,6 +22,7 @@ public class HwpfDoc {
         map.put("name", "kongbig");
         map.put("age", "25");
         map.put("sex", "男");
+        map.put("checkbox", "☑");
         String tmpFile = "D:\\dev\\test-poi.doc";
         String exportFile = "D:\\dev\\test-poi-replace.doc";
         createWordByModel(tmpFile, map, exportFile);
