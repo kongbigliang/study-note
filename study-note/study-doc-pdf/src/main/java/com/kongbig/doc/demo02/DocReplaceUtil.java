@@ -3,11 +3,12 @@ package com.kongbig.doc.demo02;
 import com.kongbig.common.dto.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.util.IOUtils;
-import org.apache.poi.xwpf.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import java.io.*;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class DocReplaceUtil {
 
     public static void main(String[] args) {
         Map<String, String> map = new HashMap<>(4);
-        map.put("name", "kongbig");
+        /*map.put("name", "kongbig");
         map.put("age", "25");
         map.put("sex", "男");
         map.put("checkbox", "☑");
@@ -36,15 +37,37 @@ public class DocReplaceUtil {
         String destPath2 = "D:\\dev\\test-poi-replace.docx";
         DocReplaceUtil.replaceAndGenerateWord(srcPath1, map, destPath1);
         DocReplaceUtil.replaceAndGenerateWord(srcPath2, map, destPath2);
-        DocReplaceUtil.replaceAndGenerateWord("D:\\dev\\1.text", map, "D:\\dev\\1-replace.text");
+        DocReplaceUtil.replaceAndGenerateWord("D:\\dev\\1.text", map, "D:\\dev\\1-replace.text");*/
 
         map.clear();
+        map.put("bsqf", "张三");
+        map.put("idcard", "440661273817293");
+        map.put("company", "喜羊羊公司");
+        map.put("platform", "京西");
+        map.put("shop", "华南第一店");
+        map.put("url", "https://www.baidu.com");
+        map.put("shopid", String.valueOf(System.currentTimeMillis()));
+        map.put("shid", String.valueOf(System.currentTimeMillis()));
+        map.put("sale", "xxx销售方");
+        map.put("bookY1", "2020");
+        map.put("bookM1", "4");
+        map.put("bookD1", "20");
+        map.put("bookY2", "2020");
+        map.put("bookM2", "8");
+        map.put("bookD2", "20");
+        map.put("signY", "2020");
+        map.put("signM", "4");
+        map.put("signD", "20");
         map.put("mao", "□");
         map.put("qiye", "□");
         map.put("geren", "☑");
-        String srcPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1-copy.docx";
+        // String srcPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1-copy.docx";
+        String srcPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1 - 副本.docx";
         String destPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1-copy-replace.docx";
+        String srcPath4 = "C:\\Users\\Administrator\\Desktop\\book\\拼多多销售授权书 - 副本.doc";
+        String destPath4 = "C:\\Users\\Administrator\\Desktop\\book\\拼多多销售授权书-copy-replace.doc";
         DocReplaceUtil.replaceAndGenerateWord(srcPath3, map, destPath3);
+        DocReplaceUtil.replaceAndGenerateWord(srcPath4, map, destPath4);
     }
 
     public static void replaceAndGenerateWord(String srcPath, Map<String, String> contentMap, String destPath) {
@@ -66,6 +89,7 @@ public class DocReplaceUtil {
 
     /**
      * 处理doc的替换
+     * 整个文本进行替换，所以key不能有包含关系
      *
      * @param srcPath
      * @param contentMap
@@ -83,9 +107,6 @@ public class DocReplaceUtil {
             // 替换内容
             for (Map.Entry<String, String> entry : contentMap.entrySet()) {
                 String key = entry.getKey(), val = entry.getValue();
-                if (StringUtils.isBlank(key)) {
-                    continue;
-                }
                 log.info("dealDoc-将key值为[{}]的文本替换为[{}]", key, val);
                 range.replaceText(key, val);
             }
@@ -117,7 +138,7 @@ public class DocReplaceUtil {
             paragraphs.forEach(p -> {
                 List<XWPFRun> runs = p.getRuns();
                 for (XWPFRun run : runs) {
-                    String key = run.text();
+                    String key = run.text().trim();
                     if (StringUtils.isBlank(key)) {
                         continue;
                     }

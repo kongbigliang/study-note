@@ -14,3 +14,16 @@
 
 ---
 
+# poi
+> HWPFDocument处理doc <br>
+> XWPFDocument处理docx 
+
+使用说明：
+1. 处理了word文档中复选框的问题，利用搜狗输入法的符号："□"、"☑"
+2. HWPFDocument替换文本的方式是全文遍历来替换，所以替换的key不能有包含关系，例如：shopId包含单词shop。
+3. XWPFDocument不能替换时，应输出全部XWPFParagraph的值来排查问题。
+
+测试demo：com.kongbig.doc.demo02.HwpfDoc、com.kongbig.doc.demo02.XwpfDocx 
+
+--- 
+
