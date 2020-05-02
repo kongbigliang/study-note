@@ -48,6 +48,28 @@ Lambda 表达式需要“函数式接口”的支持
 * 接口中只有一个抽象方法的接口，称为函数式接口。
 * 可以使用注解 @FunctionalInterface 修饰（可以检查是否是函数式接口）。
 
+Java8 内置的四大核心函数式接口
+* 消费型接口
+    ```
+    Consumer<T>
+        void accept(T t);
+    ```
+* 供给型接口
+    ```
+    Supplier<T>
+        T get();
+    ```
+* 函数式接口
+    ```
+    Function<T, R>
+        R apply(T t);
+    ```
+* 断言型接口
+    ```
+    Predicate<T>
+        boolean test(T t);        
+    ```
+
 ## 方法引用与构造器引用
 ## Stream API
 ## 接口中的默认方法与静态方法

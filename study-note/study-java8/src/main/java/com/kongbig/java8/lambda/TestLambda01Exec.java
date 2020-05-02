@@ -14,7 +14,7 @@ import java.util.List;
  * @author: lianggangda
  * @date: 2020/5/2 15:58
  */
-public class TestLambdaExec {
+public class TestLambda01Exec {
 
     List<Employee> emps = Arrays.asList(
             new Employee(101, "张三", 18, 9999.99),
