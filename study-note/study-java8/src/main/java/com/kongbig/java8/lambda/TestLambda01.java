@@ -1,5 +1,6 @@
 package com.kongbig.java8.lambda;
 
+import com.kongbig.java8.service.MyFun;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -45,6 +46,18 @@ public class TestLambda01 {
     @Test
     public void test4() {
         Comparator<Integer> comparator = (x, y) -> Integer.compare(x, y);
+    }
+
+    @Test
+    public void test5() {
+        Integer num = operation(100, (x) -> x * x);
+        System.out.println(num);
+
+        System.out.println(operation(200, (y) -> y + 200));
+    }
+
+    public Integer operation(Integer num, MyFun mf) {
+        return mf.getValue(num);
     }
 
 }
