@@ -1,9 +1,6 @@
 package com.kongbig.java8.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @Description:
@@ -14,21 +11,14 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Employee {
 
     private int id;
     private String name;
     private int age;
     private double salary;
-
-    public Employee(int id) {
-        this.id = id;
-    }
-
-    public Employee(int id, int age) {
-        this.id = id;
-        this.age = age;
-    }
+    private Status status;
 
     public Employee(String name) {
         this.name = name;
@@ -37,6 +27,13 @@ public class Employee {
     public Employee(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public Employee(int id, String name, int age, double salary) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
     }
 
     public String show() {
@@ -85,11 +82,6 @@ public class Employee {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + salary + "]";
     }
 
 }
