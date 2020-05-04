@@ -172,6 +172,17 @@ Stream API 的操作步骤：
     **`collect(Collector c)`**  | 将流转换为其他形式。接收一个 Collector接口的实现，用于给Stream中元素做汇总的方法。
 
 ### 并行流
+* 把一个内容分成多个数据块，并用不同的线程分别处理每个数据块的流。
+* Java 8 对并行进行了优化，Stream API 可以通过 parallel() 与 sequential() 对并行流与顺序流进行切换。
+* 底层fork/join框架：拆分(fork) + join(汇总)
+* fork/join 框架与传统线程池的区别
+    > 采用“工作窃取”模式（work-stealing）<br>
+    > 如果某个子问题由于等待另外一个子问题的完成而无法继续运行，那么处理该子问题的线程会主动寻找其他尚未运行的子问题来执行。
+    > 这种方式减少了线程的等待时间，提高了性能。
+
+![forkjoin框架原理](./img/forkjoin框架原理.png "forkjoin框架原理")
+
+### Optional类
 
 
 ## 接口中的默认方法与静态方法
