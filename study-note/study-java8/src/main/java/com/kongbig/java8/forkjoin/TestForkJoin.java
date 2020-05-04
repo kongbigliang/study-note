@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.ForkJoinPool;
+import java.util.stream.LongStream;
 
 /**
  * @Description:
@@ -13,7 +14,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class TestForkJoin {
 
-    private static final long COUNT = 100000000L;
+    private static final long COUNT = 50000000000L;
 
     /**
      * 用ForkJoin框架计算500亿的累加
@@ -27,7 +28,7 @@ public class TestForkJoin {
         Long sum = pool.invoke(task);
 
         Instant end = Instant.now();
-        // 约105毫秒
+        // 约23904毫秒
         System.out.println("耗费时间为：" + Duration.between(start, end).toMillis());
     }
 
@@ -44,7 +45,23 @@ public class TestForkJoin {
         }
 
         Instant end = Instant.now();
-        // 约152毫秒
+        // 约28854毫秒
+        System.out.println("耗费时间为：" + Duration.between(start, end).toMillis());
+    }
+
+    /**
+     * Java8 并行流
+     */
+    @Test
+    public void test3() {
+        Instant start = Instant.now();
+
+        LongStream.rangeClosed(0, COUNT)
+                .parallel()
+                .reduce(0, Long::sum);
+
+        Instant end = Instant.now();
+        // 约18962毫秒
         System.out.println("耗费时间为：" + Duration.between(start, end).toMillis());
     }
 
