@@ -182,8 +182,18 @@ Stream API 的操作步骤：
 
 ![forkjoin框架原理](./img/forkjoin框架原理.png "forkjoin框架原理")
 
-## 接口中的默认方法与静态方法
 ## 新时间日期 API
+* LocalDate、LocalTime、LocalDateTime 类的实例是**不可变的对象**。（线程安全）
+* Instant：时间戳。
+* Duration：用于计算两个“时间”间隔。
+* Period：用于计算两个“日期”间隔。
+* TemporalAdjuster：时间校正器。有时我们可能需要获取例如：将日期调整到“下个周日”等操作。
+* TemporalAdjusters：该类通过静态方法提供了大量的常用 TemporalAdjuster 的实现。
+* DateTimeFormatter：解析与格式化。
+* ZonedDate、ZonedTime、ZonedDateTime 时区的处理。
+
+![与传统日期处理的转换](./img/与传统日期处理的转换.png "与传统日期处理的转换")
+
 ## 其他新特性
 ### Optional类
 > Optional<T> 类(java.util.Optional) 是一个容器类，代表一个值存在或不存在，<br>
@@ -199,3 +209,40 @@ Stream API 的操作步骤：
 * orElseGet(Supplier s)：如果调用对象包含值，返回该值，否则返回 s 获取的值
 * map(Function f)：如果有值对其处理，并返回处理后的Optional，否则返回 Optional.empty()
 * flatMap(Function mapper)：与 map 类似，要求返回值必须是Optional
+
+### 接口中的默认方法与静态方法
+#### 接口中的默认方法
+接口默认方法的”类优先”原则
+```java
+interface MyFunc {
+    default String getName() {
+        return "Hello Java8!";
+    }
+}
+
+interface Named {
+    default String getName() {
+        return "Hello new features";
+    }
+}
+
+class MyClass implements MyFunc, Named {
+    public String getName() {
+        return Named.super.getName();
+    }
+}
+```
+
+#### 接口中的静态方法
+Java8 中，接口允许添加静态方法。
+```java
+interface Named {
+    public Integer myFun();
+    default String getName() {
+        return "Hello Java8";
+    }
+    static void show() {
+        System.out.println("Hello Lambda!");
+    }
+}
+```
