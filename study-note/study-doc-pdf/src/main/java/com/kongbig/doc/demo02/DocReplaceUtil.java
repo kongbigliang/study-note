@@ -5,10 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.xmlbeans.XmlException;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSym;
 
 import java.io.*;
 import java.util.HashMap;
@@ -108,7 +109,19 @@ public class DocReplaceUtil {
             for (Map.Entry<String, String> entry : contentMap.entrySet()) {
                 String key = entry.getKey(), val = entry.getValue();
                 log.info("dealDoc-将key值为[{}]的文本替换为[{}]", key, val);
-                range.replaceText(key, val);
+                switch (val) {
+                    case "☑":
+                        // TODO
+                        range.replaceText(key, val);
+                        break;
+                    case "□":
+                        // TODO
+                        range.replaceText(key, val);
+                        break;
+                    default:
+                        range.replaceText(key, val);
+                        break;
+                }
             }
             // 导出到文件
             document.write((OutputStream) byteArrayOutputStream);
@@ -126,13 +139,12 @@ public class DocReplaceUtil {
      * @param destPath
      */
     private static void dealDocx(String srcPath, Map<String, String> contentMap, String destPath) {
-        InputStream in = null;
-        XWPFDocument document = null;
-        OutputStream outputStream = null;
-        ByteArrayOutputStream byteArrayOutputStream = null;
-        try {
-            in = new FileInputStream((new File(srcPath)));
-            document = new XWPFDocument(in);
+        try (
+                InputStream in = new FileInputStream((new File(srcPath)));
+                XWPFDocument document = new XWPFDocument(in);
+                OutputStream outputStream = new FileOutputStream(destPath);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ) {
             List<XWPFParagraph> paragraphs = document.getParagraphs();
             // 替换内容
             paragraphs.forEach(p -> {
@@ -148,29 +160,48 @@ public class DocReplaceUtil {
                     if (contentMap.containsKey(key)) {
                         String val = contentMap.get(key);
                         log.info("dealDocx-将key值为[{}]的文本替换为[{}]", key, val);
-                        run.setText(val, 0);
+                        switch (val) {
+                            case "☑":
+                                run.setText("", 0);
+                                run.getCTR().getSymList().add(getCtSym("Wingdings 2", String.format("%s%s", "F0", Integer.toHexString(82))));
+                                break;
+                            case "□":
+                                run.setText("", 0);
+                                run.getCTR().getSymList().add(getCtSym("Wingdings", String.format("%s%s", "F0", Integer.toHexString(111))));
+                                break;
+                            default:
+                                run.setText(val, 0);
+                                break;
+                        }
                     }
                 }
             });
             // 导出到文件
-            byteArrayOutputStream = new ByteArrayOutputStream();
             document.write((OutputStream) byteArrayOutputStream);
-            outputStream = new FileOutputStream(destPath);
             outputStream.write(byteArrayOutputStream.toByteArray());
         } catch (IOException e) {
             log.error(e.getMessage(), e);
-        } finally {
-            IOUtils.closeQuietly(outputStream);
-            IOUtils.closeQuietly(byteArrayOutputStream);
-            try {
-                if (document != null) {
-                    document.close();
-                }
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
-            IOUtils.closeQuietly(in);
         }
+    }
+
+    /**
+     * @param wingType
+     * @param charStr
+     * @return
+     */
+    private static CTSym getCtSym(String wingType, String charStr) {
+        CTSym sym = null;
+        try {
+            sym = CTSym.Factory
+                    .parse("<xml-fragment w:font=\""
+                            + wingType
+                            + "\" w:char=\""
+                            + charStr
+                            + "\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\"> </xml-fragment>");
+        } catch (XmlException e) {
+            log.error(e.getMessage(), e);
+        }
+        return sym;
     }
 
 }
