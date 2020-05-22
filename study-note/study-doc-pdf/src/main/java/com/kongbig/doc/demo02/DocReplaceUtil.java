@@ -15,6 +15,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Description: doc和docx替换文本的工具类
@@ -62,16 +63,42 @@ public class DocReplaceUtil {
         map.put("mao", "□");
         map.put("qiye", "□");
         map.put("geren", "☑");
-        // String srcPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1-copy.docx";
-        String srcPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1 - 副本.docx";
-        String destPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1-copy-replace.docx";
-        String srcPath4 = "C:\\Users\\Administrator\\Desktop\\book\\拼多多销售授权书 - 副本.doc";
-        String destPath4 = "C:\\Users\\Administrator\\Desktop\\book\\拼多多销售授权书-copy-replace.doc";
-        DocReplaceUtil.replaceAndGenerateWord(srcPath3, map, destPath3);
-        DocReplaceUtil.replaceAndGenerateWord(srcPath4, map, destPath4);
+         String srcPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1 - 副本.docx";
+         String destPath3 = "C:\\Users\\Administrator\\Desktop\\book\\淘宝销售授权书1-copy-replace.docx";
+        // String srcPath4 = "C:\\Users\\Administrator\\Desktop\\book\\拼多多销售授权书 - 副本.doc";
+        // String destPath4 = "C:\\Users\\Administrator\\Desktop\\book\\拼多多销售授权书-copy-replace.doc";
+        DocReplaceUtil.replaceAndGenerateWord(srcPath3, map, destPath3, null);
+        // DocReplaceUtil.replaceAndGenerateWord(srcPath4, map, destPath4, null);
     }
 
-    public static void replaceAndGenerateWord(String srcPath, Map<String, String> contentMap, String destPath) {
+    /**
+     * 磅数和字号的关系：
+     * 绑    字号
+     * 5    八号
+     * 5.5  七号
+     * 6.5  小六
+     * 7.5  六号
+     * 9    小五
+     * 10.5 五号
+     * 12   小四
+     * 14   四号
+     * 15   小三
+     * 16   三号
+     * 18   小二
+     * 22   二号
+     * 24   小一
+     * 26   一号
+     * 36   小初
+     * 42   初号
+     *
+     * @param srcPath
+     * @param contentMap
+     * @param destPath
+     * @param fontSize   默认字体：小四
+     */
+    public static void replaceAndGenerateWord(String srcPath, Map<String, String> contentMap, String destPath, Integer fontSize) {
+        //  默认字体：小四
+        int defaultFontSize = 12;
         String fileType = srcPath.split("\\.")[1];
         switch (fileType) {
             case Constants.FileType.DOC:
@@ -80,7 +107,7 @@ public class DocReplaceUtil {
                 break;
             case Constants.FileType.DOCX:
                 // 处理docx
-                dealDocx(srcPath, contentMap, destPath);
+                dealDocx(srcPath, contentMap, destPath, Objects.isNull(fontSize) ? defaultFontSize : fontSize.intValue());
                 break;
             default:
                 log.error("不能处理类型为：[{}]的文件", fileType);
@@ -138,7 +165,7 @@ public class DocReplaceUtil {
      * @param contentMap
      * @param destPath
      */
-    private static void dealDocx(String srcPath, Map<String, String> contentMap, String destPath) {
+    private static void dealDocx(String srcPath, Map<String, String> contentMap, String destPath, int fontSize) {
         try (
                 InputStream in = new FileInputStream((new File(srcPath)));
                 XWPFDocument document = new XWPFDocument(in);
@@ -173,6 +200,7 @@ public class DocReplaceUtil {
                                 run.setText(val, 0);
                                 break;
                         }
+                        run.setFontSize(fontSize);
                     }
                 }
             });
