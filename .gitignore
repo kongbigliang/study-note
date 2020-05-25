@@ -1,3 +1,6 @@
 study-apollo/.idea/sonarlint/
 study-docker/.idea/sonarlint/
 study-note/.idea/sonarlint/
+study-note/study-doc-pdf/target/classes/com/kongbig/common/dto/Constants$FileType.class
+study-note/study-doc-pdf/target/
+study-zookeeper/target/classes/
