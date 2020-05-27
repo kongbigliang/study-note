@@ -17,15 +17,15 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="eureka" target="1.5" />
-      <module name="eureka2" target="1.5" />
-      <module name="microservice-config-server" target="1.5" />
-      <module name="microservice-item" target="1.5" />
-      <module name="microservice-order" target="1.5" />
-      <module name="microsrvice-api-gateway" target="1.5" />
+      <module name="eureka" target="1.8" />
+      <module name="eureka2" target="1.8" />
+      <module name="microservice-config-server" target="1.8" />
+      <module name="microservice-item" target="1.8" />
+      <module name="microservice-order" target="1.8" />
+      <module name="microsrvice-api-gateway" target="1.8" />
       <module name="study-cloud1" target="1.5" />
-      <module name="zookeeper-item" target="1.5" />
-      <module name="zookeeper-order" target="1.5" />
+      <module name="zookeeper-item" target="1.8" />
+      <module name="zookeeper-order" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

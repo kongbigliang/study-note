@@ -16,6 +16,17 @@
         <fastjson.version>1.2.58</fastjson.version>
         <lombok.version>1.16.22</lombok.version>
         <guava.version>25.1-jre</guava.version>
+        <mbg.version>1.3.7</mbg.version>
+        <!--  Java接口和实体类生成路径
+          targetMapperPackage是生成的接口包名
+          targetModelPackage是生成的实体类包名
+          -->
+        <targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+        <targetMapperPackage>com.kongbig.mb.mapper</targetMapperPackage>
+        <targetModelPackage>com.kongbig.mb.po</targetModelPackage>
+        <!--  XML生成路径  -->
+        <targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
+        <targetXMLPackage>mapper</targetXMLPackage>
     </properties>
 
     <dependencies>
@@ -57,6 +68,23 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.4</version>
+        </dependency>
+        <!-- mybatis-generator-core 反向生成java代码 -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.36</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -69,6 +97,25 @@
                     <target>${java.version}</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <!--  MBG插件  -->
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${mbg.version}</version>
+                <configuration>
+                    <!--  MBG配置文件路径  -->
+                    <configurationFile>${basedir}/src/main/resources/generator.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.46</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
