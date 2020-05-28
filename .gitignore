@@ -7,3 +7,8 @@ study-zookeeper/target/classes/
 a-snowball/.idea/sonarlint/
 study-note/.idea/
 study-zookeeper/.idea/
+study-note/study-base/study-base.iml
+study-note/study-doc-pdf/study-doc-pdf.iml
+study-note/study-netty/study-netty.iml
+study-note/study-redis/study-redis.iml
+study-note/study-sharding-jdbc/study-sharding-jdbc.iml
