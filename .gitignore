@@ -16,3 +16,5 @@ study-cloud1/.idea/
 *.iml
 study-boot/.idea/
 study-docker/.idea/
+study-rabbitmq/.idea/
+study-rabbitmq/my-rabbitB/.idea/
