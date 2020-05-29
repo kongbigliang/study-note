@@ -34,10 +34,6 @@ public class TestController {
         System.out.println("\n输出全部hashValue:");
         List list = redisService.hashValues(token);
         list.forEach(System.out::println);
-
-        System.out.println("\n删除age字段:");
-        Long age = redisService.delete(token, "age");
-        System.out.println(1 == age ? true : false);
     }
 
 }
