@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 服务端处理的代码包含了三个方法。这三个方法都是根据事件触发的
@@ -15,6 +16,7 @@ import io.netty.util.CharsetUtil;
  * @date 2020/1/13 11:38
  */
 @ChannelHandler.Sharable
+@Slf4j
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     /**
@@ -27,7 +29,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf in = (ByteBuf) msg;
         // 将消息记录到控制台
-        System.out.println("Server received: " + in.toString(CharsetUtil.UTF_8));
+        log.warn("Server received: {}", in.toString(CharsetUtil.UTF_8));
         // 将接收到的消息写给发送者，而不冲刷出站消息
         ctx.write(in);
     }

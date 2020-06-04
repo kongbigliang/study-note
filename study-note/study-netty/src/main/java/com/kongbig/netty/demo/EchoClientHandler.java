@@ -5,23 +5,25 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lianggangda
  * @date 2020/1/13 14:42
  */
+@Slf4j
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // 当被通知Channel是活跃的时候，发送一条消息
-        ctx.writeAndFlush(Unpooled.copiedBuffer("Netty rocks!", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer("netty客户端处理器channelActive!", CharsetUtil.UTF_8));
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
         // 记录已接收消息的转储
-        System.out.println("Client received: " + in.toString(CharsetUtil.UTF_8));
+        log.warn("Client received: {}", in.toString(CharsetUtil.UTF_8));
     }
 
     /**
