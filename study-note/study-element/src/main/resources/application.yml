@@ -1,0 +1,6 @@
+# 定位模板的目录
+spring:
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
