@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <!--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+    <link rel="stylesheet" href="../lib/element-ui/theme-chalk/index.css"/>
+    <style>
+        .el-header {
+            background-color: #409EFF;
+            color: #333;
+            line-height: 60px;
+        }
+
+        .el-aside {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-container style="height: 500px; border: 1px solid #eee">
+        <el-header style="text-align: right; font-size: 12px">
+            <el-dropdown>
+                <i class="el-icon-setting" style="margin-right: 15px"></i>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>查看</el-dropdown-item>
+                    <el-dropdown-item>新增</el-dropdown-item>
+                    <el-dropdown-item>删除</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+            <span>钢铁柴</span>
+        </el-header>
+
+        <el-container>
+            <el-aside width="200px">
+                <h5 style="margin: 0 auto; text-align: center;">k-ui</h5>
+                <el-input
+                        placeholder="输入关键字进行过滤"
+                        v-model="filterText">
+                </el-input>
+                <el-tree
+                        class="filter-tree"
+                        :data="treeData"
+                        default-expand-all
+                        :filter-node-method="filterNode"
+                        ref="tree">
+                </el-tree>
+            </el-aside>
+            <el-container>
+                <el-main>
+                    <template>
+                        <!--查询条件-->
+                        <el-form :inline="true" :model="filters">
+                            <el-row>
+                                <el-col :span="6">
+                                    <el-form-item label="姓名">
+                                        <el-input type="text" v-model="filters.name" size="mini" placeholder="姓名" />
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-form-item label="地址">
+                                        <el-input type="text" v-model="filters.address" size="mini" placeholder="地址" />
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-form-item label="邮编">
+                                        <el-input type="text" v-model="filters.zip" size="mini" placeholder="邮编" />
+                                    </el-form-item>
+                                </el-col>
+                                <el-col :span="6">
+                                    <el-form-item label="创建日期">
+                                        <el-date-picker type="date" v-model="filters.date" size="mini" placeholder="日期" />
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                            <el-row>
+                                <el-col :span="6">
+                                    <el-form-item>
+                                        <el-button type="primary" size="mini" @click="">查询</el-button>
+                                        <el-button size="mini" @click="resetFilters">重置</el-button>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </el-form>
+
+                        <!--操作按钮-->
+                        <el-form>
+                            <el-row>
+                                <el-col :span="12">
+                                    <el-form-item>
+                                        <el-button type="primary" size="mini">查看</el-button>
+                                        <el-button type="success" size="mini">新增</el-button>
+                                        <el-button type="success" size="mini">编辑</el-button>
+                                        <el-button type="warning" size="mini">删除</el-button>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </el-form>
+
+                        <!--表格-->
+                        <el-form>
+                            <el-row>
+                                <el-col>
+                                    <el-table
+                                            :data="tableData"
+                                            ref="multipleTable"
+                                            border
+                                            style="width: 100%"
+                                            border
+                                            @selection-change="handleSelectionChange">
+                                        <el-table-column type="selection" width="55"></el-table-column>
+                                        <el-table-column fixed prop="createTime" label="创建日期" width="150"></el-table-column>
+                                        <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                                        <el-table-column prop="province" label="省份" width="120"></el-table-column>
+                                        <el-table-column prop="city" label="市区" width="120"></el-table-column>
+                                        <el-table-column prop="address" label="地址" width=""></el-table-column>
+                                        <el-table-column prop="zip" label="邮编" width="120"></el-table-column>
+                                        <el-table-column fixed="right" label="操作" width="100">
+                                            <template slot-scope="scope">
+                                                <el-button @click="view(scope.row)" type="text" size="small">查看</el-button>
+                                                <el-button type="text" size="small">编辑</el-button>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
+                                </el-col>
+                            </el-row>
+                        </el-form>
+                    </template>
+                </el-main>
+            </el-container>
+        </el-container>
+    </el-container>
+
+    <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="55%"
+            top="5%"
+            :before-close="dialogClose">
+        <el-form :model="dialogForm" :rules="rules" ref="dialogForm" label-width="100px" class="demo-ruleForm">
+            <el-row>
+                <el-col :span="10">
+                    <el-form-item label="姓名" prop="name">
+                        <el-input size="mini" v-model="dialogForm.name"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10">
+                    <el-form-item label="性别" prop="sex">
+                        <el-select size="mini" v-model="dialogForm.sex" placeholder="请选择性别" style="width: 100%">
+                            <el-option label="男" value="1"></el-option>
+                            <el-option label="女" value="2"></el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10">
+                    <el-form-item label="创建日期" prop="createTime" required>
+                        <el-date-picker size="mini" type="date" placeholder="选择日期" v-model="dialogForm.createTime" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10">
+                    <el-form-item label="启用" prop="usable">
+                        <el-switch v-model="dialogForm.usable"></el-switch>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="20">
+                    <el-form-item label="爱好" prop="hobby">
+                        <el-checkbox-group v-model="dialogForm.hobby">
+                            <el-checkbox label="篮球" name="type"></el-checkbox>
+                            <el-checkbox label="足球" name="type"></el-checkbox>
+                            <el-checkbox label="游泳" name="type"></el-checkbox>
+                            <el-checkbox label="羽毛球" name="type"></el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="20">
+                    <el-form-item label="学历" prop="edu">
+                        <el-radio-group v-model="dialogForm.edu">
+                            <el-radio label="研究生以上"></el-radio>
+                            <el-radio label="本科"></el-radio>
+                            <el-radio label="大专"></el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10">
+                    <el-form-item label="地址" prop="address">
+                        <el-input type="textarea" v-model="dialogForm.address"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10">
+                    <el-form-item>
+                        <el-button size="mini" type="primary" @click="submitForm('dialogForm')">提交</el-button>
+                        <el-button size="mini" @click="resetForm('dialogForm')">重置</el-button>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+        </el-form>
+    </el-dialog>
+</div>
+</body>
+<script src="../js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<!-- import Vue before Element -->
+<!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+<script src="../js/vue.js"></script>
+<!-- import JavaScript -->
+<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
+<script src="../lib/element-ui/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            filterText: '',
+            treeData:  [{
+                id: 1,
+                label: '主页',
+                children: [{
+                    id: 4,
+                    label: '主页示例一'
+                }, {
+                    id: 5,
+                    label: '主页示例二'
+                }]
+            }, {
+                id: 2,
+                label: '系统管理',
+                children: [{
+                    id: 6,
+                    label: '用户管理'
+                }, {
+                    id: 7,
+                    label: '角色管理'
+                }, {
+                    id: 8,
+                    label: '菜单管理'
+                }, {
+                    id: 9,
+                    label: '通讯管理',
+                    children: [{
+                        id: 10,
+                        label: '聊天窗口'
+                    }, {
+                        id: 11,
+                        label: 'layIM'
+                    }]
+                }]
+            }],
+            multipleSelection: [],
+            dialogVisible: false,
+            filters: {
+                createTime: '',
+                name: '',
+                address: '',
+                zip: ''
+            },
+            tableData: [
+                {
+                    id: 1,
+                    createTime: '2016-05-02',
+                    name: '张小三',
+                    province: '广东',
+                    city: '广州',
+                    address: '皇后大道东 1518 号',
+                    zip: '528200'
+                }, {
+                    id: 2,
+                    createTime: '2016-05-02',
+                    name: '李小四',
+                    province: '广东',
+                    city: '广州',
+                    address: '皇后大道东 1519 号',
+                    zip: '528200'
+                }, {
+                    id: 2,
+                    createTime: '2016-05-02',
+                    name: '王小五',
+                    province: '广东',
+                    city: '广州',
+                    address: '皇后大道东 1520 号',
+                    zip: '528200'
+                }, {
+                    id: 2,
+                    createTime: '2016-05-02',
+                    name: '赵小六',
+                    province: '广东',
+                    city: '广州',
+                    address: '皇后大道东 1521 号',
+                    zip: '528200'
+                }, {
+                    id: 2,
+                    createTime: '2016-05-02',
+                    name: '刘小七',
+                    province: '广东',
+                    city: '广州',
+                    address: '皇后大道东 1522 号',
+                    zip: '528200'
+                }
+            ],
+            dialogForm: {
+                name: '',
+                sex: '',
+                createTime: '',
+                usable: true,
+                hobby: [],
+                edu: '',
+                address: ''
+            },
+            rules: {
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' },
+                    { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+                ],
+                sex: [
+                    { required: true, message: '请选择性别', trigger: 'change' }
+                ],
+                createTime: [
+                    { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+                ],
+                hobby: [
+                    { type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' }
+                ],
+                edu: [
+                    { required: true, message: '请选择学历', trigger: 'change' }
+                ],
+                address: [
+                    { required: true, message: '请填写地址', trigger: 'blur' }
+                ]
+            }
+        },
+        watch: {
+            filterText(val) {
+                this.$refs.tree.filter(val);
+            }
+        },
+        methods: {
+            filterNode(value, data) {
+                if (!value) return true;
+                return data.label.indexOf(value) !== -1;
+            },
+            handleNodeClick(data) {
+                console.log(data);
+            },
+            handleOpen(key, keyPath) {
+                console.log('key = ' + key + '; keyPath = ' + keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log('key = ' + key + '; keyPath = ' + keyPath);
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+                console.log('选中: ' + JSON.stringify(this.multipleSelection))
+            },
+            view(val) {
+                console.log('id = ' + val.id);
+                this.dialogVisible = true;
+            },
+            submitForm(val) {
+                console.log(val);
+            },
+            resetFilters() {
+                this.filters = {
+                    date: '',
+                    name: '',
+                    address: '',
+                    zip: ''
+                }
+            },
+            dialogClose() {
+                this.dialogVisible = false;
+                this.dialogForm = {
+                    name: '',
+                    sex: '',
+                    createTime: '',
+                    usable: true,
+                    hobby: [],
+                    edu: '',
+                    address: ''
+                };
+            },
+            clearForm() {
+
+            }
+        }
+    })
+</script>
+</html>

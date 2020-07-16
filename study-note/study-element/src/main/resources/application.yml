@@ -1,5 +1,7 @@
 # 定位模板的目录
 spring:
+  thymeleaf:
+    cache: false
   mvc:
     view:
       prefix: classpath:/templates/
