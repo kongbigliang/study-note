@@ -1,17 +1,12 @@
 package com.kongbig.element.demo;
 
 import cn.hutool.core.lang.Tuple;
-import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,37 +19,9 @@ import java.util.*;
  */
 public class FundDemo {
 
-    @Test
-    public void test1() throws Exception {
-        String[] arr = new String[]{"003096", "003494", "004237", "163406", "163402", "110011", "001605", "519697"};
-        for (int i = 0, len = arr.length; i < len; i++) {
-            String fundCode = arr[i];
-            String jsonStr = HttpUtil.get(String.format("http://fundgz.1234567.com.cn/js/%s.js?rt=1463558676006", fundCode));
-            String json = jsonStr.replace("jsonpgz(", "").replace(");", "");
-            System.out.println(json);
-
-            Map map = JSONObject.parseObject(json, Map.class);
-            String name = map.get("name").toString();
-
-            String destPath = String.format("D:\\fund\\%s-%s.jpg", fundCode, name);
-            URL url = new URL(String.format("http://j6.dfcfw.com/charts/StockPos/%s.png?rt=NaN", fundCode));
-            HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
-            InputStream inputStream = httpUrlConnection.getInputStream();
-            new File(destPath);
-            FileOutputStream fos = new FileOutputStream(destPath);
-
-            byte[] b = new byte[1024];
-            int length;
-            while ((length = inputStream.read(b)) > 0) {
-                fos.write(b, 0, length);
-            }
-            fos.close();
-        }
-    }
-
     public static void main(String[] args) throws Exception {
         Map<String, Integer> top = new HashMap<>();
-        String[] arr = new String[]{"003096", "003494", "004237", "163406", "163402", "110011", "001605", "519697"};
+        String[] arr = new String[]{"161005", "163402", "163406", "110011", "16002", "001605"};
         for (int i = 0, len = arr.length; i < len; i++) {
             String fundCode = arr[i];
             Tuple tuple = getOne(fundCode);
@@ -71,7 +38,11 @@ public class FundDemo {
         }
 
         System.out.println("========================================================================================");
-        System.out.println(top);
+        for (Map.Entry<String, Integer> entry : top.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.print(entry.getKey() + "=" + entry.getValue() + "\t");
+            }
+        }
     }
 
     private static Tuple getOne(String fundCode) throws Exception {
@@ -94,21 +65,23 @@ public class FundDemo {
         String htmlStr = content.substring(0, content.indexOf("\""));
 
         Document doc = Jsoup.parse(htmlStr);
+        Element fundNameA = doc.getElementsByTag("h4").first().getElementsByTag("a").first();
+        String fundName = fundNameA.text();
         Element firstTbody = doc.getElementsByTag("table").first().getElementsByTag("tbody").first();
         Elements trs = firstTbody.getElementsByTag("tr");
         Iterator<Element> iterator = trs.iterator();
         while (iterator.hasNext()) {
             Element next = iterator.next();
-            Element fundName = next.getElementsByClass("tol").first().getElementsByTag("a").first();
+            Element stockName = next.getElementsByClass("tol").first().getElementsByTag("a").first();
             Element ratio = next.getElementsByClass("tor").get(2);
-            sb.append(fundName.text() + "(" + ratio.text() + ")" + "\t");
-            set.add(fundName.text());
+            sb.append(stockName.text() + "(" + ratio.text() + ")" + "\t");
+            set.add(stockName.text());
         }
 
         inputStream.close();
         baos.close();
 
-        return new Tuple(set, sb.toString());
+        return new Tuple(set,  fundName + "\t\t" + sb.toString());
     }
 
 }
