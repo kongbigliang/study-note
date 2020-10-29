@@ -21,9 +21,10 @@ public class FundDemo {
 
     public static void main(String[] args) throws Exception {
         Map<String, Integer> top = new HashMap<>();
-        String[] arr = new String[]{"161005", "163402", "163406", "110011", "16002", "001605"};
-        for (int i = 0, len = arr.length; i < len; i++) {
-            String fundCode = arr[i];
+        List<String> arr = Arrays.asList("161005", "163402", "163406", "110011", "16002", "001605", "000248");
+        List<String> arr2 = Arrays.asList("008860", "008655", "008145", "004890", "009086", "519674");
+        for (int i = 0, len = arr.size(); i < len; i++) {
+            String fundCode = arr.get(i);
             Tuple tuple = getOne(fundCode);
             Set<String> set = (Set<String>) tuple.getMembers()[0];
             for (String s : set) {
@@ -38,9 +39,14 @@ public class FundDemo {
         }
 
         System.out.println("========================================================================================");
+        int i = 1;
         for (Map.Entry<String, Integer> entry : top.entrySet()) {
             if (entry.getValue() > 1) {
-                System.out.print(entry.getKey() + "=" + entry.getValue() + "\t");
+                System.out.print(entry.getKey() + "=" + entry.getValue() + "个\t");
+                ++i;
+                if (i == 11) {
+                    System.out.println();
+                }
             }
         }
     }
