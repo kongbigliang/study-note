@@ -21,11 +21,11 @@ public class FundDemo {
 
     public static void main(String[] args) throws Exception {
         Map<String, Integer> top = new HashMap<>();
-//        List<String> arr = new ArrayList<>(Arrays.asList("161005", "163402", "163406", "110011", "166002", "007120", "005827", "519066"));
+        List<String> arr = new ArrayList<>(Arrays.asList("161005", "163402", "163406", "110011", "166002", "007120", "005827", "519066"));
 //        List<String> arr2 = new ArrayList<>(Arrays.asList("008860", "008655", "008145", "004890", "009086", "519674", "001605"));
 //        arr.addAll(arr2);
         // 指数fund
-         List<String> arr = new ArrayList<>(Arrays.asList("162509", "202211", "000311", "000478","008592", "001556",  "100032", "160633"));
+//         List<String> arr = new ArrayList<>(Arrays.asList("162509", "202211", "000311", "000478","008592", "001556",  "100032", "160633"));
         for (int i = 0, len = arr.size(); i < len; i++) {
             String fundCode = arr.get(i);
             Tuple tuple = getOne(fundCode);
